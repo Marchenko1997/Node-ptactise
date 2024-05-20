@@ -1,5 +1,16 @@
 // src/index.js
 
-const message = 'Hello Node';
+import express from 'express';
 
-console.log(message);
+const PORT = 3000;
+
+const app = express();
+
+app.use((req, res, next) => {
+  console.log(`Time: ${new Date().toLocaleString()}`);
+  next();
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
