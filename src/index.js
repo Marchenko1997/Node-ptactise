@@ -1,0 +1,15 @@
+// src/index.js
+import dotenv from 'dotenv';
+dotenv.config();
+
+import { initMongoDB } from './db/initMongoDB.js';
+import { startServer } from './server.js';
+
+const bootstrap = async () => {
+  await initMongoDB();
+  startServer();
+};
+
+bootstrap().catch((err) => {
+  console.error('Error during server initialization', err);
+});
