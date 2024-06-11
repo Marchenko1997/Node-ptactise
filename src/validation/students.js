@@ -2,7 +2,7 @@
 
 import Joi from 'joi';
 
-const createStudentSchema = Joi.object({
+ export const createStudentSchema = Joi.object({
   name: Joi.string().min(3).max(30).required().messages({
     'string.base': 'Username should be a string', // Кастомізація повідомлення для типу "string"
     'string.min': 'Username should have at least {#limit} characters',
@@ -16,22 +16,8 @@ const createStudentSchema = Joi.object({
   onDuty: Joi.boolean(),
 });
 
-const dataToValidate = {
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    age: 12,
-    gender: 'male',
-    avgMark: 10.2,
-  };
 
-  const validationResult = createStudentSchema.validate(dataToValidate, {
-    abortEarly:false,
-  });
-  if (validationResult.error) {
-    console.error(validationResult.error.message);
-  } else {
-    console.log('Data is valid!');
-  }
+
 
   export const updateStudentSchema = Joi.object({
     name: Joi.string().min(3).max(30),
