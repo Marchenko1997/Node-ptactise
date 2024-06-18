@@ -8,6 +8,7 @@ import router from './routes/index.js';
 import notFoundHandler from './middlewares/notFoundHandler.js';
 import errorHandler from './middlewares/errorHandler.js';
 import cookieParser from 'cookie-parser';
+import { UPLOAD_DIR } from './constants/index.js';
 
 
 dotenv.config();
@@ -35,6 +36,7 @@ export const startServer = () => {
   });
 
   app.use(router);
+  app.use(express.static(UPLOAD_DIR));
 
   app.use('*', notFoundHandler);
   app.use(errorHandler);
