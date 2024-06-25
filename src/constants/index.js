@@ -20,6 +20,7 @@ export const SMTP = {
   SMTP_USER: 'SMTP_USER',
   SMTP_PASSWORD: 'SMTP_PASSWORD',
   SMTP_FROM: 'SMTP_FROM',
+  JWT_SECRET: 'JWT_SECRET',
 };
 
 export const TEMPLATES_DIR = path.join(process.cwd(), 'src', 'templates');
