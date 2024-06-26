@@ -4,7 +4,8 @@ import { registerUser } from '../db/services/auth.js';
 import { loginUser } from '../db/services/auth.js';
 import { logOutUser } from '../db/services/auth.js';
 import { ONE_DAY } from '../constants/index.js';
-import { refreshUsersSession, requestResetToken, resetPassword } from '../db/services/auth.js';
+import { refreshUsersSession, requestResetToken, resetPassword, loginOrSignupWithGoogle } from '../db/services/auth.js';
+import { generateAuthUrl } from '../utils/googleOAuth2.js';
 
 export const registerUserController = async (req, res) => {
   const user = await registerUser(req.body);
@@ -94,3 +95,28 @@ export const loginUserController = async (req, res) => {
       data: {},
     });
   };
+
+  export const getGoogleOAuthUrlController = async (req, res) => {
+    const url = generateAuthUrl();
+    res.json({
+      status: 200,
+      message: 'Successfully get Google OAuth url!',
+      data: {
+        url,
+      },
+    });
+  };
+
+
+export const loginWithGoogleController = async (req, res) => {
+  const session = await loginOrSignupWithGoogle(req.body.code);
+  setupSession(res, session);
+
+  res.json({
+    status: 200,
+    message: 'Successfully logged in via Google OAuth!',
+    data: {
+      accessToken: session.accessToken,
+    },
+  });
+};
